@@ -32,16 +32,37 @@
 							</div>
 						</div>
 						<div class="team-content">
-							<h3 class="title">{{teacher.name}}</h3>
+							<h3 class="title"><a href="{% url 'teacher_detail' teacher.pk %}">{{teacher.name}}</a></h3>
 							<span class="post">{{teacher.title}}</span>
 						</div>
 					</div>
 				</div>
 
+				
 				{% endfor %}
 
             </div><!-- end row -->
+			
+			<div class="pagination">
+				<span class="step-links">
+					{% if page_obj.has_previous %}
+						<a href="?page=1">&laquo; first</a>
+						<a href="?page={{ page_obj.previous_page_number }}">previous</a>
+					{% endif %}
+			
+					<span class="current">
+						Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+					</span>
+			
+					{% if page_obj.has_next %}
+						<a href="?page={{ page_obj.next_page_number }}">next</a>
+						<a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+					{% endif %}
+				</span>
+			</div>
         </div><!-- end container -->
-    </div><!-- end section -->	
+    </div><!-- end section -->
+	
+	
 
 	{% endblock %}
